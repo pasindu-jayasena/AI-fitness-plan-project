@@ -10,10 +10,10 @@ CORS(app)
 
 # Load preprocessing objects and models
 try:
-    preprocessor = joblib.load('backend/preprocessor.pkl')
-    label_encoder = joblib.load('backend/label_encoder.pkl')
-    ann_model = tf.keras.models.load_model('backend/fitness_ann_model.h5')
-    xgb_model = joblib.load('backend/fitness_xgb_model.pkl')
+    preprocessor = joblib.load('preprocessor.pkl')
+    label_encoder = joblib.load('label_encoder.pkl')
+    ann_model = tf.keras.models.load_model('fitness_ann_model.h5')
+    xgb_model = joblib.load('fitness_xgb_model.pkl')
     print("Models and preprocessors loaded successfully.")
     print(f"TensorFlow version: {tf.__version__}")
     print(f"Expected input columns: ['Age', 'Weight (kg)', 'Height (cm)', 'Heart Rate (bpm)', 'Resting Heart Rate (bpm)', 'Calories Burned', 'Workout Duration (mins)', 'Gender', 'Workout Intensity']")
@@ -226,7 +226,7 @@ def predict_fitness_plan(input_data):
         gender_map = {'Male': 0, 'Female': 1}
         input_df['Gender_Numeric'] = input_df['Gender'].map(gender_map)
         
-        # Convert workout intensity to numeric (if needed by the model)
+        # Convert workout intensity to numeric 
         intensity_map = {'low': 0, 'medium': 1, 'high': 2}
         input_df['Workout_Intensity_Numeric'] = input_df['Workout Intensity'].map(intensity_map)
         
